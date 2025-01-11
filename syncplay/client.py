@@ -342,6 +342,7 @@ class SyncplayClient(object):
 
     def _rewindPlayerDueToTimeDifference(self, position, setBy):
         madeChangeOnPlayer = False
+        print("Change made by user:", setBy, "for user:", self.getUsername())
         if self.getUsername() == setBy:
             self.ui.showDebugMessage("Caught attempt to rewind due to time difference with self")
         else:
@@ -414,16 +415,20 @@ class SyncplayClient(object):
     def _changePlayerStateAccordingToGlobalState(self, position, paused, doSeek, setBy):
         madeChangeOnPlayer = False
         pauseChanged = paused != self.getGlobalPaused() or paused != self.getPlayerPaused()
+        # Position is the position from the other users, transmitted to us by the server
+        # getPlayerPosition() is our local position
         diff = self.getPlayerPosition() - position
         if self._lastGlobalUpdate is None:
             madeChangeOnPlayer = self._initPlayerState(position, paused)
         self._globalPaused = paused
         self._globalPosition = position
         self._lastGlobalUpdate = time.time()
+        # print(self.getUsername(), position, setBy)
         if doSeek:
             madeChangeOnPlayer = self._serverSeeked(position, setBy)
-        if diff > self._config['rewindThreshold'] and not doSeek and not self._config['rewindOnDesync'] == False:
-            madeChangeOnPlayer = self._rewindPlayerDueToTimeDifference(position, setBy)
+        # if diff > self._config['rewindThreshold'] and not doSeek and not self._config['rewindOnDesync'] == False:
+        #     print("Diff:", diff, "DoSeek:", doSeek, "RewindThreshold:", self._config['rewindThreshold'], "RewindOnDesync:", self._config['rewindOnDesync'])
+        #     madeChangeOnPlayer = self._rewindPlayerDueToTimeDifference(position, setBy)
         if self._config['fastforwardOnDesync'] and (self.userlist.currentUser.canControl() == False or self._config['dontSlowDownWithMe'] == True):
             if diff < (constants.FASTFORWARD_BEHIND_THRESHOLD * -1) and not doSeek:
                 if self.behindFirstDetected is None:

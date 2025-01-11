@@ -246,7 +246,8 @@ class SyncplayClient(object):
                     abs(position - currentLength) < constants.PLAYLIST_LOAD_NEXT_FILE_TIME_FROM_END_THRESHOLD
                 )
             ):
-                pauseChange = self._toggleReady(pauseChange, paused)
+                # pauseChange = self._toggleReady(pauseChange, paused)
+                pass
 
         if self._lastGlobalUpdate:
             self._lastPlayerUpdate = time.time()

@@ -21,6 +21,8 @@
 # SOFTWARE.
 -->
 
+# !!! MODIFIED VERSION. VIEW ORIGINAL HERE: https://github.com/Syncplay/syncplay !!!
+
 # Syncplay
 ![GitHub Actions build status](https://github.com/Syncplay/syncplay/workflows/Build/badge.svg)
 

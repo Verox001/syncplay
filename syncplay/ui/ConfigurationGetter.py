@@ -46,7 +46,7 @@ class ConfigurationGetter(object):
             "slowdownThreshold": constants.DEFAULT_SLOWDOWN_KICKIN_THRESHOLD,
             "rewindThreshold": constants.DEFAULT_REWIND_THRESHOLD,
             "fastforwardThreshold": constants.DEFAULT_FASTFORWARD_THRESHOLD,
-            "rewindOnDesync": True,
+            "rewindOnDesync": False,
             "slowOnDesync": True,
             "fastforwardOnDesync": True,
             "dontSlowDownWithMe": False,
